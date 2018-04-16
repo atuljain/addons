@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@string='Order Lines']/field[@name='order_line']/tree[@string='Sales Order Lines']/field[@name='price_subtotal']" position="after">
-                <field name="label_status" type="checkbox" />
+                <field name="label_status" widget="many2many_checkboxes"/>
                 </xpath> 
             </field>
         </record>
