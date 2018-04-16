@@ -14,7 +14,6 @@ class sale_order_line(osv.osv):
         result = {}
         for id in ids:
             sales = self.pool.get('sale.order.line')
-            # import pdb; pdb.set_trace()
             sales_id = sales.search(cr, uid,  [('id', '=', id)])
             if sales_id:
                 sales_ob = sales.browse(cr, uid, sales_id[0], context=context)
@@ -30,15 +29,12 @@ class sale_order_line(osv.osv):
                     if stock_picking_obj.state == 'done' or stock_picking_obj.state == 'label-sent':
                         if stk_obj.state == 'done':
                             result[id] = True
-                            print "----false"
                         else:
                             result[id] = False
                     else:
                         result[id] = False
-                        print "-----true"
             else:
                 result[id] = False
-                print "----true"
         return result
 
     _inherit="sale.order.line"
