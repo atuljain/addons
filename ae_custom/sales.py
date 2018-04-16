@@ -27,10 +27,12 @@ class sale_order_line(osv.osv):
                     stock = self.pool.get('stock.move')
                     stk_id = stock.search(cr, uid,  [('sale_line_id', '=', id)])
                     stk_obj = stock.browse(cr, uid, stk_id[0], context=context)
-                    if stock_picking_obj.state == 'done':
+                    if stock_picking_obj.state == 'done' or stock_picking_obj.state == 'label-sent':
                         if stk_obj.state == 'done':
                             result[id] = True
                             print "----false"
+                        else:
+                            result[id] = False
                     else:
                         result[id] = False
                         print "-----true"
