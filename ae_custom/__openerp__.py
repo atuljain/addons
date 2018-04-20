@@ -16,7 +16,8 @@
     'website': 'http://www.boffinhub.in',
     'depends': ['base','sale','stock'],
     'data': [
-            'label_status.xml'
+            'label_status.xml',
+            'stock_views.xml'
     #      'security/ir.model.access.csv',
          ],
     'installable': True,

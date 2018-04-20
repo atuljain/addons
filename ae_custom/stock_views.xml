@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_picking_bin_packaging_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.bin.packaging.form.inherit</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="saasier_shipping.view_picking_form_new1"/>
+            <field name="arch" type="xml">
+
+				<button name="packaging_product" position="after">
+                    <button name="auto_create_pack" string="Auto Packing" type="object"  groups="base.group_sale_manager,base.group_user" class="" states="draft,confirmed,assigned"/>
+                    <!-- <button name="call_cheapest_bin_packing_api" string="Auto Packing + 3D Bin + Carrier" type="object" groups="base.group_sale_manager,base.group_user" class="oe_auto_packing_3dbin_carrier" states="draft,confirmed,assigned"/> -->
+				</button>
+				<!-- <field name="origin" position="after"> -->
+					<!--<field name="shipping_precision" invisible="1" />-->
+					<!-- <field name="shipping_precision"  /> -->
+				<!-- </field> -->
+				<!-- <page string="Products" position="after"> -->
+					<!-- <page string="Packages list"> -->
+						<!-- <field name="tracking_ids" nolabel="1"/> -->
+					<!-- </page> -->
+				<!-- </page> -->
+            </field>
+    	</record>
+		<!--Below are the chnages-->
+		<record id="auto_packing_openerp" model="ir.actions.server">
+            <field name="name">Auto Packing</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.auto_create_pack(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+
+        <record id="call_auto_packing_openerp_action" model="ir.values">
+            <field name="name">Auto Packing</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%auto_packing_openerp" />
+            <field name="object" eval="True" />
+        </record>
+    </data>
+</openerp>
