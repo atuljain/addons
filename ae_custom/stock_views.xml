@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
+        <!-- <record model="ir.ui.view" id="stock_picking_out_inherit_lable">
+            <field name="name">stock.picking.out.labelinherit</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Products']/field[@name='move_lines']/tree[@string='Stock Moves']/field[@name='state']" position="after">
+                    <field name="label_status" widget="many2many_checkboxes"/>
+                </xpath>
+            </field>
+        </record> -->
+        <record model="ir.ui.view" id="stock_move_inherit_lable">
+            <field name="name">stock.move.labelinherit</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//page[@string='Products']/field[@name='move_lines']/tree[@string='Stock Moves']/field[@name='state']" position="after">
+                    <field name="label_status" widget="many2many_checkboxes"/>
+                </xpath>  -->
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="label_created" widget="many2many_checkboxes"/>
+                    <field name="label_printed" widget="many2many_checkboxes"/>
+                </xpath>
+                <!-- <xpath expr="//page[@string='Products']/field[@name='move_lines']/field[@name='state']" position="after">
+                <field name="label_status" widget="many2many_checkboxes"/>
+                </xpath>  -->
+            </field>
+        </record>
         <record id="view_picking_bin_packaging_form_inherit" model="ir.ui.view">
             <field name="name">stock.picking.bin.packaging.form.inherit</field>
             <field name="model">stock.picking.out</field>
